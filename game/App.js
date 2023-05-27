@@ -4,18 +4,37 @@ import StartGameScreen from './screens/StartGameScreen';
 import {LinearGradient} from 'expo-linear-gradient';
 import GameScreen from './screens/GameScreen';
 import { useState } from 'react';
+import GameOverScreen from './screens/GameOverScreen';
 export default function App() {
   const [userNumber, setUserNumber] = useState();
+  const [isGameOver,setIsGameOver] = useState(false);
+  const [noRounds,setNoRounds] = useState(0);
 
 
   const pickedNumberHandler = (number)=>{
     console.log('inside picked')
     setUserNumber(number);
   }
-  let screen = <StartGameScreen onConfirm={pickedNumberHandler}/>
+
+  const resetGame = ()=>{
+    setIsGameOver(false);
+    setUserNumber();
+  }
+
+  const gameOverHandler = (rounds)=>{
+    setIsGameOver(true);
+    setNoRounds(rounds);
+  }
+
+  let screen = <StartGameScreen onConfirm={pickedNumberHandler} />
+
 
   if (userNumber){
-    screen=<GameScreen userNumber={userNumber}/>
+    screen=<GameScreen userNumber={userNumber} onOver = {gameOverHandler}/>
+  }
+
+  if(isGameOver && userNumber){
+    screen=<GameOverScreen userNumber ={userNumber} rounds={noRounds} onStart={resetGame}/>
   }
 
   return (

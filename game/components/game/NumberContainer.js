@@ -1,5 +1,5 @@
 import { Text, View,StyleSheet } from "react-native";
-const NumberContainer = (children) => {
+const NumberContainer = ({children}) => {
     return (
         <View style={styles.container}>
             <Text style={styles.numberText}>{children}</Text>

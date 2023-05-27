@@ -1,6 +1,7 @@
-import { View, TextInput, StyleSheet, Alert } from 'react-native'
+import { View, TextInput, StyleSheet, Alert ,Text} from 'react-native'
 import PrimaryButton from '../components/ui/PrimaryButton';
 import { useState } from 'react';
+import Title from '../components/ui/Title';
 const StartGameScreen = (props) => {
     const [enteredNumber,setEnteredNumber] = useState('');
 
@@ -27,22 +28,30 @@ const StartGameScreen = (props) => {
     }
 
     return (
+        <><View style={styles.rootContainer}>
+            <Title>Guess the Number</Title>
         <View style={styles.container}>
-            <TextInput style={styles.numberInput} maxLength={2} keyboardType='number-pad' autoCapitalize='none' autoCorrect={false}
-            value={enteredNumber} onChangeText={inputHandler} />
-            <View style={styles.buttonsContainer}>
-                <View style={styles.buttonContainer}>
-                    <PrimaryButton onPress={resetNumber}>Reset</PrimaryButton>
-                </View>
-                <View style={styles.buttonContainer}>
-                    <PrimaryButton onPress={confirmHandler}>Confirm</PrimaryButton>
+            <Text style = {styles.text}>Enter a Number</Text>
+                <TextInput style={styles.numberInput} maxLength={2} keyboardType='number-pad' autoCapitalize='none' autoCorrect={false}
+                    value={enteredNumber} onChangeText={inputHandler} />
+                <View style={styles.buttonsContainer}>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={resetNumber}>Reset</PrimaryButton>
+                    </View>
+                    <View style={styles.buttonContainer}>
+                        <PrimaryButton onPress={confirmHandler}>Confirm</PrimaryButton>
+                    </View>
                 </View>
             </View>
-        </View>
+            </View></>
     );
 }
 
 const styles = StyleSheet.create({
+    rootContainer:{
+        marginTop:100,
+        alignItems:'center'
+    },
     container: {
         marginTop: 100,
         padding: 16,
@@ -69,6 +78,11 @@ const styles = StyleSheet.create({
     },
     buttonContainer: {
         flex: 1
+    },
+    text:{
+        color:'#ddb52f',
+        fontSize:24,
+        fontWeight:'bold'
     }
 });
 
